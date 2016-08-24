@@ -32,4 +32,7 @@ public class Question {
         else
             return false;
     }
+    Boolean getAnswer(){
+        return answer;
+    }
 }
