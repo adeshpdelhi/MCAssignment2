@@ -26,12 +26,13 @@ public class HintActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putBoolean(RHinted,true);
+        savedInstanceState.putBoolean(RHinted,mHinted);
     }
     public void setHintShown(){
         Intent i = new Intent();
         i.putExtra(RHinted,true);
         setResult(Activity.RESULT_OK,i);
+        mHinted = true;
     }
     public void showHint(View view){
         setHintShown();

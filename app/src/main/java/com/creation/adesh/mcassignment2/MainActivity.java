@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             mHintShown = savedInstanceState.getBoolean(RHinted, false);
         }
 
-        mQuestionText.setText(number+" is a prime number.");
+        mQuestionText.setText(getString(R.string.questionText,number));
     }
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState){
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     public void next(View view){
         presentQuestion= new Question();
         number = presentQuestion.getNumber();
-        mQuestionText.setText(number+" is a prime number.");
+        mQuestionText.setText(getString(R.string.questionText,number));
         mCheated = false;
         mHintShown = false;
     }
@@ -118,9 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if(requestCode==hintRequestCode){
-            Log.v(TAG,"Request code matched");
             if(resultCode == Activity.RESULT_OK && i!=null){
-                Log.v(TAG,"Activity data received");
                 mHintShown = i.getBooleanExtra(RHinted,false);
                 if(mHintShown)
                     Toast.makeText(getApplicationContext(),"You received hint!",Toast.LENGTH_SHORT).show();

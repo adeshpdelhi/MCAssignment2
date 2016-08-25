@@ -45,9 +45,9 @@ public class CheatActivity extends AppCompatActivity {
 
     private void showCheat(){
         if(mAnswer)
-            mCheatView.setText("Prime number!");
+            mCheatView.setText(R.string.answerPrimeText);
         else
-            mCheatView.setText("Not a prime number!");
+            mCheatView.setText(R.string.answerNonPrimeText);
     }
     public void cheat(View view){
         setCheated();
