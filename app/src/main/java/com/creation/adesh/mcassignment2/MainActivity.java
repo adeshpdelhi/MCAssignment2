@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int hintRequestCode = 1;
     private Boolean mCheated = false;
     private Boolean mHintShown = false;
-    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         if(!checkIntegrity()) return;
         verifyAnswer(false);
     }
-    public Boolean checkIntegrity(){
+    private Boolean checkIntegrity(){
         checkHintShown();
         checkCheating();
         if(mHintShown || mCheated)
@@ -70,20 +68,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Incorrect Response!",Toast.LENGTH_SHORT).show();
     }
 
-    public Boolean checkHintShown(){
-        if(mHintShown){
+    private void checkHintShown(){
+        if(mHintShown)
             Toast.makeText(getApplicationContext(),"You already received hint!",Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return false;
     }
 
-    public Boolean checkCheating(){
-        if(mCheated){
+    private void checkCheating(){
+        if(mCheated)
             Toast.makeText(getApplicationContext(),"You already cheated!",Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return false;
     }
 
     public void next(View view){

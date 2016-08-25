@@ -28,7 +28,7 @@ public class HintActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBoolean(RHinted,mHinted);
     }
-    public void setHintShown(){
+    private void setHintShown(){
         Intent i = new Intent();
         i.putExtra(RHinted,true);
         setResult(Activity.RESULT_OK,i);
