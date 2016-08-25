@@ -9,12 +9,24 @@ import android.widget.TextView;
 
 public class HintActivity extends AppCompatActivity {
     private static TextView mHintText = null;
+    private Boolean mHinted = false;
     private static final String RHinted = "HINT";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hint);
         mHintText = (TextView) findViewById(R.id.hintTextView);
+        if(savedInstanceState!=null){
+            mHinted = savedInstanceState.getBoolean(RHinted,false);
+            if(mHinted)
+                showHint(new View(this));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBoolean(RHinted,true);
     }
     public void setHintShown(){
         Intent i = new Intent();

@@ -10,8 +10,8 @@ import android.widget.TextView;
 public class CheatActivity extends AppCompatActivity {
 
     private static TextView mCheatView = null;
-    private static Boolean mAnswer = false;
-    private static Boolean mCheated = false;
+    private Boolean mAnswer = false;
+    private Boolean mCheated = false;
     private static final String RCheated = "CHEATED";
     private static final String RAnswer = "ANSWER";
     @Override
@@ -23,7 +23,8 @@ public class CheatActivity extends AppCompatActivity {
         if(savedInstanceState!=null){
             mCheated = savedInstanceState.getBoolean(RCheated, false);
             mAnswer = savedInstanceState.getBoolean(RAnswer, false);
-            Log.v("dot dot",mCheated+" "+mAnswer);
+            if(mCheated)
+                cheat(new View(this));
         }
     }
 

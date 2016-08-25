@@ -49,19 +49,33 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putBoolean(RHinted,mHintShown);
     }
     public void answerTrue(View view){
-        if(checkCheating()) return;
+        if(!checkIntegrity()) return;
         verifyAnswer(true);
     }
     public void answerFalse(View view){
-        if(checkCheating()) return;
+        if(!checkIntegrity()) return;
         verifyAnswer(false);
     }
-
+    public Boolean checkIntegrity(){
+        checkHintShown();
+        checkCheating();
+        if(mHintShown || mCheated)
+            return false;
+        return true;
+    }
     private void verifyAnswer(Boolean answer){
         if(presentQuestion.checkAnswer(answer))
             Toast.makeText(getApplicationContext(),"Correct Response!",Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(getApplicationContext(),"Incorrect Response!",Toast.LENGTH_SHORT).show();
+    }
+
+    public Boolean checkHintShown(){
+        if(mHintShown){
+            Toast.makeText(getApplicationContext(),"You already received hint!",Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 
     public Boolean checkCheating(){
@@ -77,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         number = presentQuestion.getNumber();
         mQuestionText.setText(number+" is a prime number.");
         mCheated = false;
+        mHintShown = false;
     }
 
     public void showHint(View view){
