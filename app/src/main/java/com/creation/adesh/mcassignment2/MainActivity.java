@@ -56,9 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private Boolean checkIntegrity(){
         checkCheating();
-        if(mCheated)
-            return false;
-        return true;
+        return !mCheated;
     }
     private void verifyAnswer(Boolean answer){
         if(presentQuestion.checkAnswer(answer))
