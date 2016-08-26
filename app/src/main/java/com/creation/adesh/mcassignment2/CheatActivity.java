@@ -19,12 +19,13 @@ public class CheatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cheat);
         mCheatView = (TextView)findViewById(R.id.cheatView);
         mAnswer = getIntent().getBooleanExtra(RAnswer,false);
+        mCheated = getIntent().getBooleanExtra(RCheated,false);
         if(savedInstanceState!=null){
             mCheated = savedInstanceState.getBoolean(RCheated, false);
             mAnswer = savedInstanceState.getBoolean(RAnswer, false);
-            if(mCheated)
-                cheat(new View(this));
         }
+        if(mCheated)
+            cheat(new View(this));
     }
 
     @Override
@@ -49,6 +50,7 @@ public class CheatActivity extends AppCompatActivity {
             mCheatView.setText(R.string.answerNonPrimeText);
     }
     public void cheat(View view){
+        findViewById(R.id.showCheatButton).setVisibility(View.GONE);
         setCheated();
         showCheat();
     }

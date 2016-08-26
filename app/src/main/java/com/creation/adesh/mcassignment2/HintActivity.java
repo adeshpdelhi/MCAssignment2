@@ -16,11 +16,12 @@ public class HintActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hint);
         mHintText = (TextView) findViewById(R.id.hintTextView);
+        mHinted = getIntent().getBooleanExtra(RHinted,false);
         if(savedInstanceState!=null){
             mHinted = savedInstanceState.getBoolean(RHinted,false);
-            if(mHinted)
-                showHint(new View(this));
         }
+        if(mHinted)
+            showHint(new View(this));
     }
 
     @Override
@@ -35,6 +36,7 @@ public class HintActivity extends AppCompatActivity {
         mHinted = true;
     }
     public void showHint(View view){
+        findViewById(R.id.showHintButton).setVisibility(View.GONE);
         setHintShown();
         mHintText.setText(R.string.hint);
     }

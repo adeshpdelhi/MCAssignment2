@@ -55,9 +55,8 @@ public class MainActivity extends AppCompatActivity {
         verifyAnswer(false);
     }
     private Boolean checkIntegrity(){
-        checkHintShown();
         checkCheating();
-        if(mHintShown || mCheated)
+        if(mCheated)
             return false;
         return true;
     }
@@ -68,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Incorrect Response!",Toast.LENGTH_SHORT).show();
     }
 
-    private void checkHintShown(){
-        if(mHintShown)
-            Toast.makeText(getApplicationContext(),"You already received hint!",Toast.LENGTH_SHORT).show();
-    }
+//    private void checkHintShown(){
+//        if(mHintShown)
+//            Toast.makeText(getApplicationContext(),"You already received hint!",Toast.LENGTH_SHORT).show();
+//    }
 
     private void checkCheating(){
         if(mCheated)
@@ -88,12 +87,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void showHint(View view){
         Intent i = new Intent(MainActivity.this,HintActivity.class);
+        i.putExtra(RHinted,mHintShown);
         startActivityForResult(i,hintRequestCode);
     }
 
     public void showCheat(View view){
         Intent i = new Intent(MainActivity.this,CheatActivity.class);
         i.putExtra(RAnswer,presentQuestion.getAnswer());
+        i.putExtra(RCheated,mCheated);
         startActivityForResult(i,cheatRequestCode);
     }
 
@@ -102,8 +103,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode==cheatRequestCode){
             if(resultCode == Activity.RESULT_OK && i!=null){
+                Boolean oldmCheated = mCheated;
                 mCheated = i.getBooleanExtra(RCheated,false);
-                if(mCheated)
+                if(!oldmCheated && mCheated)
                     Toast.makeText(getApplicationContext(),"You cheated!",Toast.LENGTH_SHORT).show();
             }
         }
@@ -111,8 +113,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode==hintRequestCode){
             if(resultCode == Activity.RESULT_OK && i!=null){
+                Boolean oldmHintShown = mHintShown;
                 mHintShown = i.getBooleanExtra(RHinted,false);
-                if(mHintShown)
+                if(!oldmHintShown && mHintShown)
                     Toast.makeText(getApplicationContext(),"You received hint!",Toast.LENGTH_SHORT).show();
             }
         }
