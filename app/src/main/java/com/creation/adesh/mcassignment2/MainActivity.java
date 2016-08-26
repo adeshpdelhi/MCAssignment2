@@ -64,11 +64,7 @@ public class MainActivity extends AppCompatActivity {
         else
             Toast.makeText(getApplicationContext(),"Incorrect Response!",Toast.LENGTH_SHORT).show();
     }
-
-//    private void checkHintShown(){
-//        if(mHintShown)
-//            Toast.makeText(getApplicationContext(),"You already received hint!",Toast.LENGTH_SHORT).show();
-//    }
+    
 
     private void checkCheating(){
         if(mCheated)
